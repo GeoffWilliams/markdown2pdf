@@ -3,11 +3,13 @@ import os
 import argparse
 
 from weasyprint import HTML
-from markdown2 import markdown_path
+import markdown
 
 
 def convert_md_2_pdf(filename, output=None, theme=None):
-    html = markdown_path(filename)
+    with open('filename', 'r') as mdfile:
+        html = misaka.html( mdfile.read(), extensions=['autolink', 'tables'])
+
     if not output:
         output = '.'.join([filename.rsplit('.')[0], 'pdf'])
 
