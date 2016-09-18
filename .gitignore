@@ -17,3 +17,8 @@ dist
 
 *.md
 *.pdf
+
+.venv
+test_files/*
+.python-version
+_test.py
