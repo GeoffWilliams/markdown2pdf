@@ -28,7 +28,7 @@ setup(
     packages=['markdown2pdf'],
     zip_safe=False,
     platforms='any',
-    data_files=gen_data_files("markdown2pdf/themes")
+    data_files=gen_data_files("markdown2pdf/themes"),
     install_requires=[
         'weasyprint',
         'misaka',
