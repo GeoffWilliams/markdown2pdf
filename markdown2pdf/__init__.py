@@ -7,7 +7,7 @@ import misaka
 
 
 def convert_md_2_pdf(filename, output=None, theme=None):
-    with open('filename', 'r') as mdfile:
+    with open(filename, 'r') as mdfile:
         html = misaka.html( mdfile.read(), extensions=['autolink', 'tables'])
 
     if not output:
