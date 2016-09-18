@@ -17,13 +17,12 @@ def fread(filepath):
 
 setup(
     name='Markdown2PDF',
-    version='0.1.3',
-    url='https://github.com/kxxoling/markdown2pdf',
+    version='0.2.0',
+    url='https://github.com/lynnco/markdown2pdf',
     license='MIT',
-    author='Kane Blueriver',
-    author_email='kxxoling@gmail.com',
-    description='A tool converts Markdown file to PDF, '
-                'originally designed for developers\' resume release.',
+    author='Lynn Cyrin',
+    author_email='lynncyrin@gmail.com',
+    description='Converts Markdown file to PDF',
     long_description=fread('README.rst'),
     packages=['markdown2pdf'],
     zip_safe=False,
