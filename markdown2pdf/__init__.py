@@ -30,7 +30,7 @@ def convert_md_2_pdf(filename, output=None, theme=None):
 def main():
     parser = argparse.ArgumentParser(description='Convert markdown file to pdf')
     parser.add_argument('filename', help='Markdown file name')
-    parser.add_argument('--theme', help='Set the theme, default is GitHub flavored.', default=None)
+    parser.add_argument('--theme', help='Set the theme, default is GitHub flavored.', default='github')
     parser.add_argument('--output', help='The output file name. If not set, '
                         'the name will be same as the input file but with ".pdf".')
     args = parser.parse_args()
