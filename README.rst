@@ -54,5 +54,8 @@ Trouble shooting
 
 2. ``OSError: library not found: 'libcairo.so.2'``
 
-This means you need to get some requirements installed first, see this page:
-[WeasyPrint fails with error on OSX](https://github.com/Kozea/WeasyPrint/issues/79).
+.. code-block:: shell
+
+    brew install cairo pango gdk-pixbuf libxml2 libxslt libffi
+
+(from: https://github.com/Kozea/WeasyPrint/issues/79)
