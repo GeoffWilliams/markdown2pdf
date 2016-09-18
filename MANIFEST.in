@@ -1,1 +1,1 @@
-include markdown2pdf/themes/*
+include markdown2pdf/themes/*.css
