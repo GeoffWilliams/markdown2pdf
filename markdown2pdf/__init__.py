@@ -3,7 +3,7 @@ import os
 import argparse
 
 from weasyprint import HTML
-import markdown
+import misaka
 
 
 def convert_md_2_pdf(filename, output=None, theme=None):
