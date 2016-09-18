@@ -21,7 +21,7 @@ setup(
     platforms='any',
     install_requires=[
         'weasyprint',
-        'markdown2',
+        'misaka',
     ],
     entry_points={
         'console_scripts': [
