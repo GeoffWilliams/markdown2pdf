@@ -12,6 +12,9 @@ Install Markdown2PDF with pip
 
     pip install git+https://github.com/lynnco/markdown2pdf.git
 
+Also requires the following system libraries ``cairo pango gdk-pixbuf libxml2 libxslt libffi``
+
+(TODO: https://github.com/lynnco/markdown2pdf/issues/11)
 
 Usage
 -----
