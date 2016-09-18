@@ -1,5 +1,14 @@
+import os
 from setuptools import setup
 
+
+def gen_data_files(*dirs):
+    results = []
+
+    for src_dir in dirs:
+        for root,dirs,files in os.walk(src_dir):
+            results.append((root, map(lambda f:root + "/" + f, files)))
+    return results
 
 def fread(filepath):
     with open(filepath, 'r') as f:
@@ -19,6 +28,7 @@ setup(
     packages=['markdown2pdf'],
     zip_safe=False,
     platforms='any',
+    data_files=gen_data_files("markdown2pdf/themes")
     install_requires=[
         'weasyprint',
         'misaka',
