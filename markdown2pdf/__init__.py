@@ -13,7 +13,7 @@ def convert_md_2_pdf(filename, output=None, theme=None):
     if not output:
         output = '.'.join([filename.rsplit('.')[0], 'pdf'])
 
-    if not theme is not None:
+    if theme is not None:
         css_file = theme
         if not os.path.exists(css_file):
             css_file = os.path.join(
