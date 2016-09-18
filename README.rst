@@ -42,6 +42,7 @@ Contains these default themes
 
 * ghostwriter (from mixu/markdown-styles)
 
+**Until I can figure out otherwise, the default themes require a virtualenv installation**
 
 Trouble shooting
 ----------------
