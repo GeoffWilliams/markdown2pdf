@@ -13,14 +13,13 @@ def convert_md_2_pdf(filename, output=None, theme=None):
     if not output:
         output = '.'.join([filename.rsplit('.')[0], 'pdf'])
 
-    css_file = theme
-    if not os.path.exists(css_file):
-        css_file = os.path.join(
+    if not os.path.exists(theme):
+        theme = os.path.join(
             os.environ['VIRTUAL_ENV'], # <= might not exist
             os.path.dirname(__file__),
             'themes/'+theme+'.css',
         )
-    HTML(string=html).write_pdf(output, stylesheets=[css_file])
+    HTML(string=html).write_pdf(output, stylesheets=[theme])
 
 
 def main():
