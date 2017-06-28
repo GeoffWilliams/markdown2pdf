@@ -1,6 +1,7 @@
 import os
 from setuptools import setup
 
+from markdown2pdf import __version__
 
 def gen_data_files(*dirs):
     results = []
@@ -17,7 +18,7 @@ def fread(filepath):
 
 setup(
     name='Markdown2PDF',
-    version='0.2.0',
+    version=__version__,
     url='https://github.com/lynnco/markdown2pdf',
     license='MIT',
     author='Lynn Cyrin',
@@ -34,7 +35,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'md2pdf = markdown2pdf:main',
+            'md2pdf = markdown2pdf.markdown2pdf:main',
         ]
     },
     classifiers=[
