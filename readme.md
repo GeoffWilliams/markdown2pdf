@@ -4,6 +4,43 @@ Markdown2pdf is python command line tool to convert markdown files to pdf
 
 ## Installation
 
+## Hacky hack hack mchacky hack
+```
+
+# fix syntax crash, updated toc
+pip3 install git+https://github.com/geoffwilliams/mistune-contrib.git
+
+# fix page counters for TOC - fixes https://github.com/Kozea/WeasyPrint/pull/652
+# use the next one for collective fix.. pip3 install git+https://github.com/Kozea/WeasyPrint
+
+# the toc internal links all broken because of cairo bug
+# https://github.com/Kozea/WeasyPrint/issues/678
+# https://gitlab.freedesktop.org/cairo/cairo/issues/336
+pip3 install git+https://github.com/Tontyna/WeasyPrint@patch_for_678
+
+```
+
+## Troubleshooting
+
+Munted TOC?
+
+Your headers `#` can only jump up/down one level at a time!
+
+How to do my coversheet?
+
+Normal markdown as you like, then the exact magic incantation:
+<div style="page-break-after: always;">&nbsp;</div>
+
+eg:
+```markdown
+# My Report
+## My report that was done at great time and expense
+Private and Confidential
+<div style="page-break-after: always;">&nbsp;</div>
+...rest of document here...
+```
+
+
 ### OSX
 
 ```shell
