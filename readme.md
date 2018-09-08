@@ -40,6 +40,49 @@ Private and Confidential
 ...rest of document here...
 ```
 
+Where's my images - I'm doing a recursive document
+
+Probably they are lost because the HTML generater has
+no idea about the relative part of that path since it 
+just gets one big glob of text to work with.
+
+Solution:
+1. always load images from `image`, eg `<img src="image/...`
+2. For each directory that needs images, create a directory at the same
+   level, like this:
+   
+```
+├── foo
+├── image
+│   └── ...
+└── basics
+    └── bar
+        ├── image
+        │   └── ...
+        └── baz.md
+```
+
+### Tips and tricks
+
+#### Want a directory level heading?
+
+00_index.md
+```markdown
+# Tada!
+```
+
+Now start all the other markdown files in the directory with
+level 2 headings and they will be nicely grouped in output
+
+#### Control output order
+Just name your files into alphabetical order, numbers are a good trick here:
+
+```shell
+00_index.md
+10_foo.md
+20_bar.md
+30_baz.md
+```
 
 ### OSX
 

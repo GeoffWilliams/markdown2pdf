@@ -6,7 +6,7 @@ import os
 
 
 
-# nasty hack
+# nasty hack to fix all internal links broken
 os.environ["WEASYPRINT_USE_PDFRW"] = "yes"
 
 
@@ -19,29 +19,34 @@ from mistune_contrib.highlight import HighlightMixin
 from mistune_contrib.toc import TocMixin
 import weasyprint
 
+EXCLUDED_DIRS = ['spec']
+
 
 class CustomRenderer(HighlightMixin, TocMixin, mistune.Renderer):
     pass
+
 
 def read_file(filename):
     with open(filename, 'r') as file:
         txt = file.read()
 
+    # prevent any run-together files
+    txt += "\n\n"
     return txt
 
 
 def scandir(basedir):
-  files = []
-  for l in os.listdir(basedir):
-    path = os.path.join(basedir, l)
-    if os.path.isdir(path):
-      if not l.startswith("."):
-        for found in scandir(path):
-          files.append(found)
-    elif l.endswith(".md"):
-      files.append(path)
+    files = []
+    for l in sorted(os.listdir(basedir)):
+        path = os.path.join(basedir, l)
+        if l.endswith(".md"):
+            files.append(path)
+        elif os.path.isdir(path):
+            if not l.startswith(".") and l not in EXCLUDED_DIRS:
+                for found in scandir(path):
+                    files.append(found)
 
-  return files
+    return files
 
 
 def convert_md_2_pdf(filename, output=None, theme=None, line_numbers=None, debug=None, no_toc=None, footer_fragment=None):
@@ -54,7 +59,6 @@ def convert_md_2_pdf(filename, output=None, theme=None, line_numbers=None, debug
     else:
         print("no footer!")
         footer_xml = "&nbsp";
-
 
     mdtxt = ""
     if os.path.isdir(filename):
@@ -99,7 +103,7 @@ def convert_md_2_pdf(filename, output=None, theme=None, line_numbers=None, debug
     # ======================
     # VVVVV    HTML    VVVVV
 
-    toc_html = custom_renderer.render_toc(level=4)
+    toc_html = "<h1>Contents</h1>\n" + custom_renderer.render_toc(level=4)
     html = nasty_hack_footer + html_cover + pagebreak + html_body
 
 
