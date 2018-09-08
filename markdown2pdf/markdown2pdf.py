@@ -29,6 +29,21 @@ def read_file(filename):
 
     return txt
 
+
+def scandir(basedir):
+  files = []
+  for l in os.listdir(basedir):
+    path = os.path.join(basedir, l)
+    if os.path.isdir(path):
+      if not l.startswith("."):
+        for found in scandir(path):
+          files.append(found)
+    elif l.endswith(".md"):
+      files.append(path)
+
+  return files
+
+
 def convert_md_2_pdf(filename, output=None, theme=None, line_numbers=None, debug=None, no_toc=None, footer_fragment=None):
     pagebreak = """<div style="page-break-after: always;">&nbsp;</div>"""
     first_style = """ class="firstpage" """
@@ -46,12 +61,9 @@ def convert_md_2_pdf(filename, output=None, theme=None, line_numbers=None, debug
         # load all images relative to the top level directory
         basedir = filename
         print("processing directory")
-        for root, dirs, files in os.walk(filename):
-            for f in files:
-                if f.endswith(".md"):
-                    work_file = os.path.join(root,f)
-                    print("processing: %s" % work_file)
-                    mdtxt += read_file(work_file)
+        for work_file in scandir(filename):
+            print("processing: %s" % work_file)
+            mdtxt += read_file(work_file)
     else:
         # recursively process a directory
         mdtxt = read_file(filename)
