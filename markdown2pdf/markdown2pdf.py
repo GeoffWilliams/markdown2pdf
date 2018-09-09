@@ -49,7 +49,7 @@ def scandir(basedir):
     return files
 
 
-def convert_md_2_pdf(filename, output=None, theme=None, line_numbers=None, debug=None, no_toc=None, footer_fragment=None):
+def convert_md_2_pdf(filename, output=None, theme=None, line_numbers=None, debug=None, no_toc=None, footer_fragment=None, cover_h1=None, cover_h2=None):
     pagebreak = """<div style="page-break-after: always;">&nbsp;</div>"""
     first_style = """ class="firstpage" """
     nasty_hack_footer = """<footer class="nasty_hack_footer">&nbsp;</footer>"""
@@ -77,16 +77,19 @@ def convert_md_2_pdf(filename, output=None, theme=None, line_numbers=None, debug
 
     md_split = re.split(pagebreak, mdtxt, 1)
 
+    # cover renderer - dont want TOC, use basic renderer
+    markdown = mistune.Markdown()
     if len(md_split) > 1:
-        # we have a cover page...
-
-        # cover - dont want TOC, use basic renderer
-        markdown = mistune.Markdown()
+        # we have a cover page in the doc...
         html_cover = markdown(md_split[0])
         body_index = 1
     else:
         print("no cover avaiable")
-        html_cover = ""
+        html_cover = markdown(f"""
+# {cover_h1}
+## {cover_h2}
+        """)
+        print(html_cover)
         body_index = 0
 
     # body - do want TOC, use fully sick renderer
@@ -192,6 +195,16 @@ def main():
         '--footer-fragment',
         help='Footer HTML (XML) fragment - default is to read footer.xml from current dir',
         default="footer.xml"
+    )
+    parser.add_argument(
+        '--cover-h1',
+        help='Use this as h1-heading for cover',
+        default="",
+    )
+    parser.add_argument(
+        '--cover-h2',
+        help='Use this as h2-heading for cover',
+        default="",
     )
     args = parser.parse_args()
     convert_md_2_pdf(**dict(args._get_kwargs()))

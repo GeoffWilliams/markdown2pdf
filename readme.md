@@ -61,6 +61,8 @@ Solution:
         │   └── ...
         └── baz.md
 ```
+3. symlink each image back to the top level `image` directory. Now your images
+work both in raw markdown and during conversion
 
 ### Tips and tricks
 
