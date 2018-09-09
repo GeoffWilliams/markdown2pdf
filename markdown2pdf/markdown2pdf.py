@@ -89,7 +89,6 @@ def convert_md_2_pdf(filename, output=None, theme=None, line_numbers=None, debug
 # {cover_h1}
 ## {cover_h2}
         """)
-        print(html_cover)
         body_index = 0
 
     # body - do want TOC, use fully sick renderer
