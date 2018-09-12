@@ -75,6 +75,10 @@ def convert_md_2_pdf(filename, output=None, theme=None, line_numbers=None, debug
         # load all images relative to the file
         basedir = os.path.dirname(filename)
 
+    # preprocess to remove links to local markdown files which makes no sense in
+    # combined document - put them in italics its the best we can do...
+    mdtxt = re.sub(r"\[([^\]]+)]\(\w[^)]+\.md\)", r"_\1_", mdtxt)
+
     md_split = re.split(pagebreak, mdtxt, 1)
 
     # cover renderer - dont want TOC, use basic renderer
